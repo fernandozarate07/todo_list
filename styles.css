@@ -1,4 +1,11 @@
 /* general */
+:root {
+    /* Neutros */
+    --color-white: #ffffff;
+    --color-black: #222222;
+    --color-gray: #b3b3b3;
+    --color-blue: #2196f3; /* Azul intenso */
+}
 * {
     padding: 0;
     margin: 0;
@@ -24,17 +31,19 @@ input {
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    background-color: var(--color-gray);
 }
 .header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid black;
 }
 .main {
     display: grid;
     grid-template-columns: 25% 75%;
+
+    overflow: hidden;
 }
 .menu {
     padding: 20px;
@@ -43,6 +52,9 @@ input {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    background-color: var(--color-blue);
+    border-radius: 10px;
 }
 .menu__add-app-container {
     width: 100%;
@@ -51,34 +63,40 @@ input {
     justify-content: center;
     align-items: center;
 
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--color-white);
 }
 .menu__add-app-btn {
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid black;
+
+    border: none;
+    background-color: var(--color-white);
 }
 .menu__projects-container {
     width: 100%;
+    max-height: 55vh;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    overflow-y: auto;
 }
 .project-preview {
     width: 80%;
     padding: 10px;
-    margin: 20px;
+    margin-inline: 20px;
+    margin-top: 20px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
 
-    border: 1px solid black;
     border-radius: 10px;
+    background-color: var(--color-white);
 }
 .project__opcion {
     display: flex;
@@ -98,8 +116,8 @@ input {
 .item {
     padding: 10px;
     border-radius: 10px;
-
-    border: 1px solid black;
+    background-color: var(--color-blue);
+    color: var(--color-white);
 }
 .project__name {
     grid-column: 1 / 5;
@@ -138,12 +156,14 @@ input {
     align-self: center;
 
     border-radius: 10px;
+    outline: none;
+    border: none;
+    resize: none;
+    overflow: scroll;
 }
 /* footer */
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border-top: 1px solid black;
 }

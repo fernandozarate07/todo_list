@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Projects TOP</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&family=Poppins:wght@400&display=swap"
+            rel="stylesheet" />
+    </head>
+    <!-- body -->
+    <body class="body">
+        <!-- header -->
+        <header class="header">
+            <h1 class="header__logo">PROJECTS TOP</h1>
+        </header>
+        <!-- main -->
+        <main class="main">
+            <!-- menu -->
+            <div class="menu">
+                <div class="menu__add-app-container">
+                    <button class="menu__add-app-btn">
+                        NEW PROJECT
+                        <i class="fa-solid fa-plus menu__add-app-icon"></i>
+                    </button>
+                </div>
+                <div class="menu__projects-container">
+                    <div class="project-preview">
+                        <h4 class="project-preview__name">Todo List</h4>
+                        <input type="checkbox" class="project-preview__task-done" />
+                        <i class="fa-solid fa-trash project-preview__trash"></i>
+                        <i class="fa-solid fa-pen-to-square project-preview__edit"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- project -->
+            <div class="project">
+                <h3 class="project__name">Todo list</h3>
+                <div class="project__status">
+                    <h3 class="project__status-name">Status</h3>
+                    <p class="project__status-description"></p>
+                </div>
+                <div class="project__requirements">
+                    <h3 class="project__requirements-name">Requirements</h3>
+                    <div class="project__requirements-task-container"></div>
+                </div>
+                <div class="project__deadline">
+                    <h3 class="project__deadline-name">Deadline</h3>
+                    <p class="project__date"></p>
+                </div>
+                <div class="project__architecture">
+                    <h3 class="project__architecture-name">Architecture</h3>
+                    <p class="project__architecture-description"></p>
+                </div>
+                <div class="project__dependency">
+                    <h3 class="project__dependency-name">Dependency</h3>
+                    <div class="project__dependency-task-container"></div>
+                </div>
+                <div class="project__technology-stack">
+                    <h3 class="project__technology-stack-name">Technology Stack</h3>
+                    <div class="project__technology-stack-task-container"></div>
+                </div>
+                <div class="project__note">
+                    <h3 class="project__note-name">Note</h3>
+                    <textarea class="project__note-textarea" placeholder="Enter task details here."></textarea>
+                </div>
+            </div>
+        </main>
+        <!-- footer -->
+        <footer class="footer">
+            <p class="footer__description">&copy; Fernando Zárate 2024</p>
+        </footer>
+    </body>
+</html>

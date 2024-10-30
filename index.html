@@ -23,12 +23,12 @@
             <div class="menu">
                 <div class="menu__add-app-container">
                     <button class="menu__add-app-btn">
-                        NEW PROJECT
+                        New project
                         <i class="fa-solid fa-plus menu__add-app-icon"></i>
                     </button>
                 </div>
                 <div class="menu__projects-container">
-                    <div class="project-preview">
+                    <div class="project-preview task">
                         <input type="checkbox" class="project-preview__task-done" />
                         <h4 class="project-preview__name">Todo List</h4>
                         <div class="project__opcion">
@@ -40,34 +40,59 @@
             </div>
             <!-- project -->
             <div class="project">
+                <!-- name -->
                 <h2 class="project__name">Todo list</h2>
+                <!-- requirement -->
                 <div class="project__requirements item">
                     <h3 class="project__requirements-name">Requirements</h3>
-                    <div class="project__requirements-task-container"></div>
+                    <div class="project__requirements-task-container">
+                        <button class="project__requirements-add-btn">
+                            Add requirement <i class="fa-solid fa-plus menu__add-app-icon"></i>
+                        </button>
+                        <div class="project__requirements-tasks"></div>
+                    </div>
                 </div>
+                <!-- status -->
                 <div class="project__status item">
                     <h3 class="project__status-name">Status</h3>
-                    <p class="project__status-description"></p>
+                    <div class="project__status-btn-container">
+                        <button class="project__status-btn btn-on">In progres</button>
+                        <button class="project__status-btn btn-off">Finished</button>
+                    </div>
                 </div>
-                <div class="project__deadline item">
-                    <h3 class="project__deadline-name">Deadline</h3>
-                    <p class="project__date"></p>
-                </div>
+                <!-- architecture -->
                 <div class="project__architecture item">
                     <h3 class="project__architecture-name">Architecture</h3>
-                    <p class="project__architecture-description"></p>
+                    <textarea
+                        class="project__architecture-description textarea"
+                        placeholder="Enter details here."></textarea>
                 </div>
+                <!-- technology -->
                 <div class="project__technology-stack item">
                     <h3 class="project__technology-stack-name">Technology Stack</h3>
-                    <div class="project__technology-stack-task-container"></div>
+                    <textarea
+                        class="project__technology-description textarea"
+                        placeholder="Enter details here."></textarea>
                 </div>
-                <div class="project__dependency item">
-                    <h3 class="project__dependency-name">Dependency</h3>
-                    <div class="project__dependency-task-container"></div>
+                <!-- deadline -->
+                <div class="project__deadline item">
+                    <h3 class="project__deadline-name">Deadline</h3>
+                    <div class="project__deadline-date-container">
+                        <input type="date" class="project__date" />
+                    </div>
                 </div>
                 <div class="project__note item">
                     <h3 class="project__note-name">Note</h3>
-                    <textarea class="project__note-textarea" placeholder="Enter task details here."></textarea>
+                    <textarea class="project__note-textarea textarea" placeholder="Enter details here."></textarea>
+                </div>
+                <div class="project__dependency item">
+                    <h3 class="project__dependency-name">Dependency</h3>
+                    <div class="project__dependency-task-container">
+                        <button class="project__dependency-add-btn">
+                            Add dependency <i class="fa-solid fa-plus menu__add-app-icon"></i>
+                        </button>
+                        <div class="project__dependency-tasks"></div>
+                    </div>
                 </div>
             </div>
         </main>

@@ -3,8 +3,8 @@
     /* Neutros */
     --color-white: #ffffff;
     --color-black: #222222;
-    --color-gray: #b3b3b3;
-    --color-blue: #2196f3; /* Azul intenso */
+    --color-gray: #f0f0f0;
+    --background-color: #d2b48c;
 }
 * {
     padding: 0;
@@ -36,8 +36,8 @@ input {
     gap: 10px;
 
     border-radius: 10px;
-    background-color: var(--color-blue);
-    color: var(--color-white);
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
 .textarea {
     padding: 10px;
@@ -57,12 +57,13 @@ input {
 .footer {
     padding: 10px;
 }
+
 /* especific */
 .body {
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    background-color: var(--color-white);
+    background-color: var(--color-gray);
 }
 .header {
     display: flex;
@@ -89,7 +90,7 @@ input {
     justify-content: flex-start;
     align-items: center;
 
-    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
     border-radius: 10px;
 }
 .menu__add-app-container {
@@ -98,15 +99,64 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 
-    border-bottom: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-white);
+    padding-bottom: 20px;
 }
 .menu__add-app-btn {
-    margin: 20px;
+    height: 100%;
     padding: 10px;
-    border-radius: 10px;
 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 10px;
     border: none;
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+.menu__add-app-modal {
+    width: 80%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color-gray);
+    border-radius: 10px;
+}
+.menu__add-app-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.menu__add-app-form h3 {
+    align-self: center;
+}
+.menu__add-app-input {
+    width: 100%;
+    padding: 5px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+.menu__add-app-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.modal-btn {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
     background-color: var(--color-black);
     color: var(--color-white);
 }
@@ -134,7 +184,7 @@ input {
 .item {
     padding: 10px;
     border-radius: 10px;
-    background-color: var(--color-blue);
+    background-color: var(--color-black);
     color: var(--color-white);
 }
 /* name */
@@ -290,4 +340,12 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* visible & invisible */
+.visible {
+    display: flex;
+}
+.invisible {
+    display: none;
 }

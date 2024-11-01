@@ -20,28 +20,38 @@
         <!-- main -->
         <main class="main">
             <!-- menu -->
-            <div class="menu">
+            <aside class="menu">
                 <div class="menu__add-app-container">
-                    <button class="menu__add-app-btn">
+                    <button class="menu__add-app-btn visible">
                         New project
                         <i class="fa-solid fa-plus menu__add-app-icon"></i>
                     </button>
+                    <div class="menu__add-app-modal invisible">
+                        <form class="menu__add-app-form" id="form-name">
+                            <h3>Name of project</h3>
+                            <input type="text" name="asda" class="menu__add-app-input" maxlength="50">
+                        </form>                        
+                        <div class="menu__add-app-btn-container">
+                            <button class="menu__add-app-btn-cancel modal-btn ">Cancel</button>
+                            <button  type="submit" form="form-name" class="menu__add-app-btn-add modal-btn">Add</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu__projects-container">
-                    <div class="project-preview task">
+                    <!-- <div class="project-preview task">
                         <input type="checkbox" class="project-preview__task-done" />
                         <h4 class="project-preview__name">Todo List</h4>
                         <div class="project__opcion">
                             <i class="fa-solid fa-trash project-preview__trash"></i>
                             <i class="fa-solid fa-pen-to-square project-preview__edit"></i>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-            </div>
+            </aside>
             <!-- project -->
-            <div class="project">
+            <section class="project">
                 <!-- name -->
-                <h2 class="project__name">Todo list</h2>
+                <h2 class="project__name item"></h2>
                 <!-- requirement -->
                 <div class="project__requirements item">
                     <h3 class="project__requirements-name">Requirements</h3>
@@ -56,7 +66,7 @@
                 <div class="project__status item">
                     <h3 class="project__status-name">Status</h3>
                     <div class="project__status-btn-container">
-                        <button class="project__status-btn btn-on">In progres</button>
+                        <button class="project__status-btn btn-off">In progres</button>
                         <button class="project__status-btn btn-off">Finished</button>
                     </div>
                 </div>
@@ -94,11 +104,13 @@
                         <div class="project__dependency-tasks"></div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
         <!-- footer -->
         <footer class="footer">
             <p class="footer__description">&copy; Fernando Zárate 2024</p>
         </footer>
+        <!-- scrip -->
+        <script type="module" src="./modules/controler.js"></script>
     </body>
 </html>

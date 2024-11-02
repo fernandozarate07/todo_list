@@ -163,8 +163,6 @@ input {
 .menu__projects-container {
     width: 100%;
     max-height: 55vh;
-
-    overflow-y: auto;
 }
 .project__opcion {
     display: flex;

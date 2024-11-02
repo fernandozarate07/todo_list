@@ -1,14 +1,15 @@
-import { modalInvisible, modalVisible, renderMenu, cleanInput } from "./vision.js";
-import { addObservers, Project, addProject, projects } from "./model.js";
-// observers function
-addObservers(renderMenu); //agregar render menu como funcion observadora
-// load page
-renderMenu(projects);
+import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu, modalEditNameVisible } from "./vision.js";
+import { addObservers, Project, addProject, projects, deleteProject } from "./model.js";
+// observadores
+addObservers(renderMenu); //agregar la funcion renderMenu como un observador
 
-// add new project
+// cargar pagina de incio
+renderMenu(projects); //renderiza la pagina al entrar y carga los proyectos almazenados en localstorage
+
+// funcionalidad add project
 const addProjectBtn = document.querySelector(".menu__add-app-btn");
 addProjectBtn.addEventListener("click", (event) => {
-    cleanInput();
+    cleanInput(); // borra el valor del input
     modalVisible(addProjectBtn);
 });
 const cancelModaltBtn = document.querySelector(".menu__add-app-btn-cancel");
@@ -33,12 +34,19 @@ function validateName(projectName, projects) {
 const formName = document.getElementById("form-name").addEventListener("submit", (event) => {
     event.preventDefault();
     let projectName = getName();
-    const isvalid = validateName(projectName, projects);
+    const isvalid = validateName(projectName, projects); // para obtener un boleano y utilizarlo en el condicional siguiente
     if (isvalid) {
         modalInvisible(addProjectBtn);
         let newProject = new Project(projectName);
         addProject(newProject);
     } else {
         alert("error");
+    }
+});
+// delete funcionalidad
+projectMenu.addEventListener("click", (event) => {
+    if (event.target.classList.contains("project-preview__trash")) {
+        const id = Number(event.target.dataset.id);
+        deleteProject(id);
     }
 });

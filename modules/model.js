@@ -1,21 +1,22 @@
 // localStorage.clear();
-// load projecs
+// aca se guarda la logica de persistencia y local storage
 function loadProjects() {
     const storageProjects = localStorage.getItem("projects");
     return storageProjects ? JSON.parse(storageProjects) : [];
 }
-const projects = loadProjects();
+const projects = loadProjects(); // creamos el array de projects
 
 function saveProjects() {
     localStorage.setItem("projects", JSON.stringify(projects));
     console.log(projects);
 }
-saveProjects();
+saveProjects(); // guardamos el array creado en localstorage
 
 // Existen en este modulo dos iffe que contienen la logica de dos patrones observadores
 const menuObserver = (() => {
-    // observers
+    // aca encontraras la logica de observer
     const observers = [];
+
     function addObservers(obs) {
         observers.push(obs);
         console.log(observers);
@@ -25,7 +26,7 @@ const menuObserver = (() => {
             obs(projects);
         });
     }
-    // proyect objet
+    // esta clase funciona para crear instacia de objetos del tipo project
     class Project {
         static idCounter = 1;
         constructor(projectName) {
@@ -41,23 +42,20 @@ const menuObserver = (() => {
             this.dependency = [];
         }
     }
-    // state changers
+    //aca se ecnuentra la logica que sirve para cambiar el estado del sujeto
     function addProject(newProject) {
         projects.push(newProject);
         saveProjects();
         notify();
     }
-    // function editName(id, newName) {
-    //     const project = projects.find((project) => project.id === id);
-    //     if (project) {
-    //         project.name = newName;
-    //     } else {
-    //         console.log(`No se encontró un proyecto con el id: ${id}`);
-    //     }
-    // }
-    // function deleteProject() {}
+    function deleteProject(id) {
+        let projectToDelete = projects.findIndex((project) => project.id === id);
+        projects.splice(projectToDelete, 1);
+        saveProjects();
+        notify();
+    }
 
-    return { addObservers, Project, addProject };
+    return { addObservers, Project, addProject, deleteProject };
 })();
-export const { addObservers, Project, addProject } = menuObserver;
+export const { addObservers, Project, addProject, deleteProject } = menuObserver;
 export { projects };

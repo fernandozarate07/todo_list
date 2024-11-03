@@ -39,6 +39,7 @@ function createProjectElement(projectName, project) {
     const checkbox = document.createElement("input");
     checkbox.classList.add("project-preview__task-done");
     checkbox.setAttribute("type", "checkbox");
+    checkbox.dataset.id = project.id;
 
     const nameElement = document.createElement("h4");
     nameElement.classList.add("project-preview__name");

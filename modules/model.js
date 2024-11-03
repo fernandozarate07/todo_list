@@ -54,8 +54,13 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
+    function changeState(id, isChecked) {
+        let projectToChange = projects.find((project) => project.id === id);
+        projectToChange.status = isChecked;
+        // console.log(projectToChange.status);
+    }
 
-    return { addObservers, Project, addProject, deleteProject };
+    return { addObservers, Project, addProject, deleteProject, changeState };
 })();
-export const { addObservers, Project, addProject, deleteProject } = menuObserver;
+export const { addObservers, Project, addProject, deleteProject, changeState } = menuObserver;
 export { projects };

@@ -1,5 +1,5 @@
 import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu, modalEditNameVisible } from "./vision.js";
-import { addObservers, Project, addProject, projects, deleteProject } from "./model.js";
+import { addObservers, Project, addProject, projects, deleteProject, changeState } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
 
@@ -43,10 +43,17 @@ const formName = document.getElementById("form-name").addEventListener("submit",
         alert("error");
     }
 });
-// delete funcionalidad
 projectMenu.addEventListener("click", (event) => {
+    // delete funcionalidad
     if (event.target.classList.contains("project-preview__trash")) {
         const id = Number(event.target.dataset.id);
         deleteProject(id);
+    }
+    // cambiar el estado del proyecto
+
+    if (event.target.classList.contains("project-preview__task-done")) {
+        const id = Number(event.target.dataset.id);
+        const isChecked = event.target.checked;
+        changeState(id, isChecked);
     }
 });

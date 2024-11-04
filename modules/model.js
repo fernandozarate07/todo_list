@@ -1,4 +1,3 @@
-// localStorage.clear();
 // aca se guarda la logica de persistencia y local storage
 function loadProjects() {
     const storageProjects = localStorage.getItem("projects");
@@ -8,7 +7,6 @@ const projects = loadProjects(); // creamos el array de projects
 
 function saveProjects() {
     localStorage.setItem("projects", JSON.stringify(projects));
-    console.log(projects);
 }
 saveProjects(); // guardamos el array creado en localstorage
 
@@ -19,7 +17,6 @@ const menuObserver = (() => {
 
     function addObservers(obs) {
         observers.push(obs);
-        console.log(observers);
     }
     function notify() {
         observers.forEach((obs) => {
@@ -28,9 +25,10 @@ const menuObserver = (() => {
     }
     // esta clase funciona para crear instacia de objetos del tipo project
     class Project {
-        static idCounter = 1;
         constructor(projectName) {
-            this.id = Project.idCounter++;
+            const currentId = Number(localStorage.getItem("projectIdCounter")) || 1;
+            this.id = currentId;
+            localStorage.setItem("projectIdCounter", currentId + 1); // Incrementa y guarda el nuevo valor
             this.requirements = [];
             this.name = projectName;
             this.status = false;
@@ -82,6 +80,7 @@ const menuObserver = (() => {
         });
         let projectToSelect = projects.find((project) => project.id === id);
         projectToSelect.isSelected = true;
+        console.log(projectToSelect.id);
         saveProjects();
         notify();
     }

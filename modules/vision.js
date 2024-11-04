@@ -35,7 +35,12 @@ function renderProject(projects) {
     const itemName = document.querySelector(".project__name");
     const inprogresBtn = document.querySelector(".btn-inprogres");
     const finishedBtn = document.querySelector(".btn-finished");
-
+    if (projects.length === 0) {
+        itemName.textContent = "Name :";
+        inprogresBtn.classList.add("btn-off");
+        finishedBtn.classList.add("btn-off");
+        return;
+    }
     projects.forEach((project) => {
         if (project.isSelected === true) {
             // name

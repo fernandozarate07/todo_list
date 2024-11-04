@@ -38,7 +38,6 @@ function validateName(projectName, projects) {
         console.log("el nombre esta ocupado intenta otro");
         return false;
     } else {
-        console.log(projectName);
         return true;
     }
 }

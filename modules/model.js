@@ -40,6 +40,7 @@ const menuObserver = (() => {
             this.deadLine = undefined;
             this.note = "";
             this.dependency = [];
+            this.isSelected = false;
         }
     }
     //aca se ecnuentra la logica que sirve para cambiar el estado del sujeto
@@ -57,10 +58,22 @@ const menuObserver = (() => {
     function changeState(id, isChecked) {
         let projectToChange = projects.find((project) => project.id === id);
         projectToChange.status = isChecked;
-        // console.log(projectToChange.status);
+        saveProjects();
+        notify();
+        console.log(projectToChange.status);
+    }
+    function selectedProject(id) {
+        projects.forEach((project) => {
+            project.isSelected = false;
+        });
+        let projectToSelect = projects.find((project) => project.id === id);
+        if (!projectToSelect) return;
+        projectToSelect.isSelected = true;
+        saveProjects();
+        notify();
     }
 
-    return { addObservers, Project, addProject, deleteProject, changeState };
+    return { addObservers, Project, addProject, deleteProject, changeState, selectedProject };
 })();
-export const { addObservers, Project, addProject, deleteProject, changeState } = menuObserver;
+export const { addObservers, Project, addProject, deleteProject, changeState, selectedProject } = menuObserver;
 export { projects };

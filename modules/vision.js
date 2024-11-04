@@ -35,11 +35,18 @@ function renderMenu(projects) {
 function createProjectElement(projectName, project) {
     const elementContainer = document.createElement("div");
     elementContainer.classList.add("project-preview", "task");
+    elementContainer.dataset.id = project.id;
+    if (project.isSelected) {
+        elementContainer.classList.add("selected");
+    } else {
+        elementContainer.classList.add("no-selected");
+    }
 
     const checkbox = document.createElement("input");
     checkbox.classList.add("project-preview__task-done");
     checkbox.setAttribute("type", "checkbox");
     checkbox.dataset.id = project.id;
+    checkbox.checked = project.status;
 
     const nameElement = document.createElement("h4");
     nameElement.classList.add("project-preview__name");
@@ -58,10 +65,5 @@ function createProjectElement(projectName, project) {
     opcionContainer.appendChild(deleteIcon);
     projectMenu.appendChild(elementContainer);
 }
-// muestra el modal edit name
-function modalEditNameVisible(modal) {
-    modal.classList.remove("invisible");
-    modal.classList.add("visible");
-}
 
-export { modalVisible, modalInvisible, renderMenu, cleanInput, projectMenu, modalEditNameVisible };
+export { modalVisible, modalInvisible, renderMenu, cleanInput, projectMenu };

@@ -1,5 +1,5 @@
-import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu, modalEditNameVisible } from "./vision.js";
-import { addObservers, Project, addProject, projects, deleteProject, changeState } from "./model.js";
+import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu } from "./vision.js";
+import { addObservers, Project, addProject, projects, deleteProject, changeState, selectedProject } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
 
@@ -54,6 +54,13 @@ projectMenu.addEventListener("click", (event) => {
     if (event.target.classList.contains("project-preview__task-done")) {
         const id = Number(event.target.dataset.id);
         const isChecked = event.target.checked;
+        event.stopPropagation(); // Detiene la propagación para que no se llame a selectedProject
         changeState(id, isChecked);
+        return;
+    }
+    // selecionar proyecto
+    if (event.target.classList.contains("project-preview")) {
+        const id = Number(event.target.dataset.id);
+        selectedProject(id);
     }
 });

@@ -31,6 +31,32 @@ function renderMenu(projects) {
         createProjectElement(projectName, project);
     });
 }
+function renderProject(projects) {
+    const itemName = document.querySelector(".project__name");
+    const inprogresBtn = document.querySelector(".btn-inprogres");
+    const finishedBtn = document.querySelector(".btn-finished");
+
+    projects.forEach((project) => {
+        if (project.isSelected === true) {
+            // name
+            itemName.textContent = "";
+            itemName.textContent = `Name : ${project.name}`;
+            // status
+            if (project.status === false) {
+                inprogresBtn.classList.remove("btn-off");
+                inprogresBtn.classList.add("btn-on");
+                finishedBtn.classList.remove("btn-on");
+                finishedBtn.classList.add("btn-off");
+            }
+            if (project.status === true) {
+                inprogresBtn.classList.remove("btn-on");
+                inprogresBtn.classList.add("btn-off");
+                finishedBtn.classList.remove("btn-off");
+                finishedBtn.classList.add("btn-on");
+            }
+        }
+    });
+}
 //funcion para crear el elemento project
 function createProjectElement(projectName, project) {
     const elementContainer = document.createElement("div");
@@ -66,4 +92,4 @@ function createProjectElement(projectName, project) {
     projectMenu.appendChild(elementContainer);
 }
 
-export { modalVisible, modalInvisible, renderMenu, cleanInput, projectMenu };
+export { modalVisible, modalInvisible, renderMenu, renderProject, cleanInput, projectMenu };

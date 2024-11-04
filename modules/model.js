@@ -31,7 +31,6 @@ const menuObserver = (() => {
         static idCounter = 1;
         constructor(projectName) {
             this.id = Project.idCounter++;
-            // this.focus = true;
             this.requirements = [];
             this.name = projectName;
             this.status = false;
@@ -55,25 +54,54 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
-    function changeState(id, isChecked) {
+    function changeStateinMenu(id, isChecked) {
         let projectToChange = projects.find((project) => project.id === id);
         projectToChange.status = isChecked;
         saveProjects();
         notify();
         console.log(projectToChange.status);
     }
+    function changeStateinProject(event, projectToChangeStatus) {
+        if (projectToChangeStatus) {
+            // Verifica que haya un proyecto seleccionado
+            if (event.target.classList.contains("btn-inprogres")) {
+                projectToChangeStatus.status = false;
+            }
+            if (event.target.classList.contains("btn-finished")) {
+                projectToChangeStatus.status = true;
+            }
+            saveProjects();
+            notify();
+        } else {
+            console.warn("No project is selected.");
+        }
+    }
     function selectedProject(id) {
         projects.forEach((project) => {
             project.isSelected = false;
         });
         let projectToSelect = projects.find((project) => project.id === id);
-        if (!projectToSelect) return;
         projectToSelect.isSelected = true;
         saveProjects();
         notify();
     }
-
-    return { addObservers, Project, addProject, deleteProject, changeState, selectedProject };
+    return {
+        addObservers,
+        Project,
+        addProject,
+        deleteProject,
+        changeStateinMenu,
+        selectedProject,
+        changeStateinProject,
+    };
 })();
-export const { addObservers, Project, addProject, deleteProject, changeState, selectedProject } = menuObserver;
+export const {
+    addObservers,
+    Project,
+    addProject,
+    deleteProject,
+    changeStateinMenu,
+    selectedProject,
+    changeStateinProject,
+} = menuObserver;
 export { projects };

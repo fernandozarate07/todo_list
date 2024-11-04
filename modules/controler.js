@@ -1,10 +1,21 @@
-import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu } from "./vision.js";
-import { addObservers, Project, addProject, projects, deleteProject, changeState, selectedProject } from "./model.js";
+import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu, renderProject } from "./vision.js";
+import {
+    addObservers,
+    Project,
+    addProject,
+    projects,
+    deleteProject,
+    changeStateinMenu,
+    changeStateinProject,
+    selectedProject,
+} from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
+addObservers(renderProject);
 
 // cargar pagina de incio
 renderMenu(projects); //renderiza la pagina al entrar y carga los proyectos almazenados en localstorage
+renderProject(projects);
 
 // funcionalidad add project
 const addProjectBtn = document.querySelector(".menu__add-app-btn");
@@ -43,6 +54,7 @@ const formName = document.getElementById("form-name").addEventListener("submit",
         alert("error");
     }
 });
+// funcionalid de project menu
 projectMenu.addEventListener("click", (event) => {
     // delete funcionalidad
     if (event.target.classList.contains("project-preview__trash")) {
@@ -55,7 +67,7 @@ projectMenu.addEventListener("click", (event) => {
         const id = Number(event.target.dataset.id);
         const isChecked = event.target.checked;
         event.stopPropagation(); // Detiene la propagación para que no se llame a selectedProject
-        changeState(id, isChecked);
+        changeStateinMenu(id, isChecked);
         return;
     }
     // selecionar proyecto
@@ -63,4 +75,9 @@ projectMenu.addEventListener("click", (event) => {
         const id = Number(event.target.dataset.id);
         selectedProject(id);
     }
+});
+// funcionalidad de project
+const statusContainer = document.querySelector(".project__status-btn-container").addEventListener("click", (event) => {
+    const projectToChangeStatus = projects.find((project) => project.isSelected === true);
+    changeStateinProject(event, projectToChangeStatus);
 });

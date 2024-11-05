@@ -1,4 +1,11 @@
-import { modalInvisible, modalVisible, renderMenu, cleanInput, projectMenu, renderProject } from "./vision.js";
+import {
+    modalMenuInvisible,
+    modalMenuVisible,
+    renderMenu,
+    projectMenu,
+    renderProject,
+    modalEditnameVisibility,
+} from "./vision.js";
 import {
     addObservers,
     Project,
@@ -8,6 +15,7 @@ import {
     changeStateinMenu,
     changeStateinProject,
     selectedProject,
+    editName,
 } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
@@ -20,12 +28,11 @@ renderProject(projects);
 // funcionalidad add project
 const addProjectBtn = document.querySelector(".menu__add-app-btn");
 addProjectBtn.addEventListener("click", (event) => {
-    cleanInput(); // borra el valor del input
-    modalVisible(addProjectBtn);
+    modalMenuVisible(addProjectBtn);
 });
 const cancelModaltBtn = document.querySelector(".menu__add-app-btn-cancel");
 cancelModaltBtn.addEventListener("click", (event) => {
-    modalInvisible(addProjectBtn);
+    modalMenuInvisible(addProjectBtn);
 });
 function getName() {
     return document.querySelector(".menu__add-app-input").value;
@@ -46,7 +53,7 @@ const formName = document.getElementById("form-name").addEventListener("submit",
     let projectName = getName();
     const isvalid = validateName(projectName, projects); // para obtener un boleano y utilizarlo en el condicional siguiente
     if (isvalid) {
-        modalInvisible(addProjectBtn);
+        modalMenuInvisible(addProjectBtn);
         let newProject = new Project(projectName);
         addProject(newProject);
     } else {
@@ -79,4 +86,22 @@ projectMenu.addEventListener("click", (event) => {
 const statusContainer = document.querySelector(".project__status-btn-container").addEventListener("click", (event) => {
     const projectToChangeStatus = projects.find((project) => project.isSelected === true);
     changeStateinProject(event, projectToChangeStatus);
+});
+const editNameBtm = document.querySelector(".project__edit-btn");
+editNameBtm.addEventListener("click", () => {
+    modalEditnameVisibility();
+});
+const saveBtn = document.querySelector(".project__project-editname-submit-btn");
+const inputEditName = document.querySelector(".project__input-modal-name");
+saveBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    let projectToEditName = projects.find((project) => project.isSelected === true);
+    let newName = inputEditName.value;
+    const isvalid = validateName(newName, projects);
+    if (isvalid) {
+        editName(projectToEditName, newName);
+        modalEditnameVisibility();
+    } else {
+        alert("error");
+    }
 });

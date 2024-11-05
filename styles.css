@@ -188,9 +188,44 @@ input {
     color: var(--color-white);
 }
 /* name */
-.project__name {
+.project__name-container {
     grid-column: 1 / 5;
     align-self: center;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.projec__modal-name-container {
+    display: flex;
+    gap: 10px;
+}
+.project__editname-form {
+    width: 300px;
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+}
+.project__project-editname-submit-btn {
+    padding: 10px;
+
+    border-radius: 10px;
+    border: none;
+    color: var(--color-black);
+    background-color: var(--color-white);
+}
+.project__input-modal-name {
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+.project__edit-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
 }
 /* requirement */
 .project__requirements {

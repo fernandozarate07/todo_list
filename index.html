@@ -33,7 +33,9 @@
                         </form>
                         <div class="menu__add-app-btn-container">
                             <button class="menu__add-app-btn-cancel modal-btn">Cancel</button>
-                            <button type="submit" form="form-name" class="menu__add-app-btn-add modal-btn">Add</button>
+                            <button type="submit" form="form-name" class="menu__add-app-btn-add modal-btn">
+                                Create
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -51,7 +53,16 @@
             <!-- project -->
             <section class="project">
                 <!-- name -->
-                <h2 class="project__name item">Name :</h2>
+                <div class="project__name-container item">
+                    <h2 class="project__name">Name :</h2>
+                    <div class="projec__modal-name-container">
+                        <form class="project__editname-form invisible">
+                            <input type="text" class="project__input-modal-name" placeholder="New name" />
+                            <button class="project__project-editname-submit-btn">Save</button>
+                        </form>
+                        <button class="project__edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                </div>
                 <!-- requirement -->
                 <div class="project__requirements item">
                     <h3 class="project__requirements-name">Requirements</h3>

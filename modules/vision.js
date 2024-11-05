@@ -3,26 +3,30 @@ import { projects } from "./model.js";
 const projectModal = document.querySelector(".menu__add-app-modal");
 const projectMenu = document.querySelector(".menu__projects-container");
 const projectInput = document.querySelector(".menu__add-app-input");
+const editnameModal = document.querySelector(".project__editname-form");
+const inputEditName = document.querySelector(".project__input-modal-name");
 
 // muestra el modal para añadir nuevo proeycto
-function modalVisible(addProjectBtn) {
+function modalMenuVisible(addProjectBtn) {
+    projectInput.value = "";
     addProjectBtn.classList.remove("visible");
     addProjectBtn.classList.add("invisible");
     projectModal.classList.remove("invisible");
     projectModal.classList.add("visible");
 }
-//borra el valor del input
-function cleanInput() {
-    projectInput.value = "";
-}
 //oculta el modal para añadir nuevo proeycto
-function modalInvisible(addProjectBtn) {
+function modalMenuInvisible(addProjectBtn) {
     addProjectBtn.classList.remove("invisible");
     addProjectBtn.classList.add("visible");
     projectModal.classList.remove("visible");
     projectModal.classList.add("invisible");
 }
-
+// muestra el modal para editar nombre
+function modalEditnameVisibility() {
+    inputEditName.value = "";
+    editnameModal.classList.toggle("invisible");
+    editnameModal.classList.toggle("visible");
+}
 //  aca se encuentras las funciones observadoras
 function renderMenu(projects) {
     projectMenu.innerHTML = "";
@@ -97,4 +101,4 @@ function createProjectElement(projectName, project) {
     projectMenu.appendChild(elementContainer);
 }
 
-export { modalVisible, modalInvisible, renderMenu, renderProject, cleanInput, projectMenu };
+export { modalMenuVisible, modalMenuInvisible, renderMenu, renderProject, projectMenu, modalEditnameVisibility };

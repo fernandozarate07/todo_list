@@ -84,6 +84,11 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
+    function editName(projectToEditName, newName) {
+        projectToEditName.name = newName;
+        saveProjects();
+        notify();
+    }
     return {
         addObservers,
         Project,
@@ -92,6 +97,7 @@ const menuObserver = (() => {
         changeStateinMenu,
         selectedProject,
         changeStateinProject,
+        editName,
     };
 })();
 export const {
@@ -102,5 +108,6 @@ export const {
     changeStateinMenu,
     selectedProject,
     changeStateinProject,
+    editName,
 } = menuObserver;
 export { projects };

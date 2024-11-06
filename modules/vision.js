@@ -5,6 +5,10 @@ const projectMenu = document.querySelector(".menu__projects-container");
 const projectInput = document.querySelector(".menu__add-app-input");
 const editnameModal = document.querySelector(".project__editname-form");
 const inputEditName = document.querySelector(".project__input-modal-name");
+const textArchitecture = document.querySelector(".project__architecture-description");
+const textStack = document.querySelector(".project__technology-description");
+const textNote = document.querySelector(".project__note-textarea");
+const projectDateInput = document.querySelector(".project__date");
 
 // muestra el modal para añadir nuevo proeycto
 function modalMenuVisible(addProjectBtn) {
@@ -43,6 +47,10 @@ function renderProject(projects) {
         itemName.textContent = "Name :";
         inprogresBtn.classList.add("btn-off");
         finishedBtn.classList.add("btn-off");
+        textArchitecture.value = "";
+        textStack.value = "";
+        textNote.value = "";
+        projectDateInput.value = "";
         return;
     }
     projects.forEach((project) => {
@@ -63,6 +71,15 @@ function renderProject(projects) {
                 finishedBtn.classList.remove("btn-off");
                 finishedBtn.classList.add("btn-on");
             }
+            // architecture
+            textArchitecture.value = project.architecture;
+            // technologyStack
+            textStack.value = project.tecnologiStack;
+            // note
+            textNote.value = project.note;
+            // date
+            projectDateInput.value = project.deadLine;
+            console.log(project.deadLine);
         }
     });
 }

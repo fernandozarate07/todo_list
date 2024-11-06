@@ -89,6 +89,30 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
+    function renderTextArchitecture(textArchitecture) {
+        let project = projects.find((project) => project.isSelected === true);
+        project.architecture = textArchitecture.value;
+        saveProjects();
+        notify();
+    }
+    function renderTextStack(textStack) {
+        let project = projects.find((project) => project.isSelected === true);
+        project.tecnologiStack = textStack.value;
+        saveProjects();
+        notify();
+    }
+    function renderTextNote(textNote) {
+        let project = projects.find((project) => project.isSelected === true);
+        project.note = textNote.value;
+        saveProjects();
+        notify();
+    }
+    function changeDate(projectDateInput) {
+        let project = projects.find((project) => project.isSelected === true);
+        project.deadLine = projectDateInput.value;
+        saveProjects();
+        notify();
+    }
     return {
         addObservers,
         Project,
@@ -98,6 +122,10 @@ const menuObserver = (() => {
         selectedProject,
         changeStateinProject,
         editName,
+        renderTextArchitecture,
+        renderTextStack,
+        renderTextNote,
+        changeDate,
     };
 })();
 export const {
@@ -109,5 +137,9 @@ export const {
     selectedProject,
     changeStateinProject,
     editName,
+    renderTextArchitecture,
+    renderTextStack,
+    renderTextNote,
+    changeDate,
 } = menuObserver;
 export { projects };

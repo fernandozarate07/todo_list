@@ -16,6 +16,10 @@ import {
     changeStateinProject,
     selectedProject,
     editName,
+    renderTextArchitecture,
+    renderTextStack,
+    renderTextNote,
+    changeDate,
 } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
@@ -83,10 +87,13 @@ projectMenu.addEventListener("click", (event) => {
     }
 });
 // funcionalidad de project
+
+// status
 const statusContainer = document.querySelector(".project__status-btn-container").addEventListener("click", (event) => {
     const projectToChangeStatus = projects.find((project) => project.isSelected === true);
     changeStateinProject(event, projectToChangeStatus);
 });
+// name
 const editNameBtm = document.querySelector(".project__edit-btn");
 editNameBtm.addEventListener("click", () => {
     modalEditnameVisibility();
@@ -104,4 +111,24 @@ saveBtn.addEventListener("click", (event) => {
     } else {
         alert("error");
     }
+});
+// architecture
+const textArchitecture = document.querySelector(".project__architecture-description");
+textArchitecture.addEventListener("input", () => {
+    renderTextArchitecture(textArchitecture);
+});
+// technologyStack
+const textStack = document.querySelector(".project__technology-description");
+textStack.addEventListener("input", () => {
+    renderTextStack(textStack);
+});
+// note
+const textNote = document.querySelector(".project__note-textarea");
+textNote.addEventListener("input", () => {
+    renderTextNote(textNote);
+});
+// date
+const projectDateInput = document.querySelector(".project__date");
+projectDateInput.addEventListener("input", () => {
+    changeDate(projectDateInput);
 });

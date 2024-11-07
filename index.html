@@ -119,12 +119,22 @@
                     <h3 class="project__note-name">Note</h3>
                     <textarea class="project__note-textarea textarea" placeholder="Enter details here."></textarea>
                 </div>
+
+                <!-- dependency -->
                 <div class="project__dependency item">
                     <h3 class="project__dependency-name">Dependency</h3>
                     <div class="project__dependency-task-container">
-                        <button class="project__dependency-add-btn">
-                            Add dependency <i class="fa-solid fa-plus menu__add-app-icon"></i>
-                        </button>
+                        <div class="project__dependency-add-container">
+                            <button class="project__dependency-add-btn">
+                                Add dependency <i class="fa-solid fa-plus menu__add-app-icon-dependency"></i>
+                            </button>
+                            <div class="project__dependency-input-container invisible">
+                                <input type="text" class="input-task-dependency" />
+                                <button class="project__dependency-save-btn">
+                                    <i class="fa-solid fa-floppy-disk icon-project-dependency"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="project__dependency-tasks"></div>
                     </div>
                 </div>

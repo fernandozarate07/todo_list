@@ -33,6 +33,15 @@ const menuObserver = (() => {
             this.status = false;
         }
     }
+    class Dependency {
+        constructor(taskName) {
+            const taskId = Number(localStorage.getItem("taskDependencyId")) || 1;
+            this.id = taskId;
+            localStorage.setItem("taskDependencyId", taskId + 1); // Incrementa y guarda el nuevo valor
+            this.name = taskName;
+            this.status = false;
+        }
+    }
     class Project {
         constructor(projectName) {
             const currentId = Number(localStorage.getItem("projectIdCounter")) || 1;
@@ -139,8 +148,28 @@ const menuObserver = (() => {
     }
     function deleteTask(taskId, project) {
         let taskToDelete = project.requirements.findIndex((task) => task.id === taskId);
-        console.log("Index to delete:", taskToDelete);
         project.requirements.splice(taskToDelete, 1);
+        saveProjects();
+        notify();
+    }
+    function addTaskDependency(taskName) {
+        let project = projects.find((project) => project.isSelected === true);
+        const newTask = new Dependency(taskName);
+        project.dependency.push(newTask);
+        console.log(newTask);
+        saveProjects();
+        notify();
+    }
+    function changeStateTaskDependency(taskId, isChecked, project) {
+        let taskToChange = project.dependency.find((task) => task.id === taskId);
+        taskToChange.status = isChecked;
+        saveProjects();
+        notify();
+        console.log(taskToChange.status);
+    }
+    function deleteTaskDependency(taskId, project) {
+        let taskToDelete = project.dependency.findIndex((task) => task.id === taskId);
+        project.dependency.splice(taskToDelete, 1);
         saveProjects();
         notify();
     }
@@ -160,6 +189,9 @@ const menuObserver = (() => {
         addTaskRequirement,
         changeStateTask,
         deleteTask,
+        addTaskDependency,
+        changeStateTaskDependency,
+        deleteTaskDependency,
     };
 })();
 export const {
@@ -178,5 +210,8 @@ export const {
     addTaskRequirement,
     changeStateTask,
     deleteTask,
+    addTaskDependency,
+    changeStateTaskDependency,
+    deleteTaskDependency,
 } = menuObserver;
 export { projects };

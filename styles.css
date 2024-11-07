@@ -378,15 +378,39 @@ input {
     background-color: var(--color-white);
     border-radius: 10px;
 }
+.project__dependency-add-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
 .project__dependency-add-btn {
     padding: 10px;
-
-    align-self: flex-end;
 
     border-radius: 10px;
     border: none;
     background-color: var(--color-black);
     color: var(--color-white);
+}
+.project__dependency-input-container {
+    width: 65%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+.input-task-dependency {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--color-black);
+    padding: 8px;
+    outline: none;
+}
+.project__dependency-save-btn {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-black);
+    border-radius: 10px;
+}
+.icon-project-dependency {
+    padding: 10px;
 }
 .project__dependency-tasks {
     height: 100%;

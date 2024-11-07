@@ -6,6 +6,7 @@ import {
     renderProject,
     modalEditnameVisibility,
     inputRequirementVisible,
+    inputDependencyVisible,
 } from "./vision.js";
 import {
     addObservers,
@@ -24,6 +25,9 @@ import {
     addTaskRequirement,
     changeStateTask,
     deleteTask,
+    addTaskDependency,
+    changeStateTaskDependency,
+    deleteTaskDependency,
 } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
@@ -166,5 +170,37 @@ requirementTaskContainer.addEventListener("click", (event) => {
         const taskId = Number(event.target.dataset.id);
         const project = projects.find((project) => project.isSelected === true);
         deleteTask(taskId, project);
+    }
+});
+// dependency
+const addDependencyBtn = document.querySelector(".project__dependency-add-btn");
+const saveDependencyBtn = document.querySelector(".project__dependency-save-btn");
+const inputDependency = document.querySelector(".input-task-dependency");
+
+addDependencyBtn.addEventListener("click", () => {
+    inputDependencyVisible();
+    inputDependency.value = "";
+});
+
+saveDependencyBtn.addEventListener("click", () => {
+    const taskName = inputDependency.value;
+    addTaskDependency(taskName);
+    inputDependencyVisible();
+});
+const dependencyTaskContainer = document.querySelector(".project__dependency-tasks");
+dependencyTaskContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("task-checkbox")) {
+        const taskId = Number(event.target.dataset.id);
+        const project = projects.find((project) => project.isSelected === true);
+        const isChecked = event.target.checked;
+        event.stopPropagation();
+        changeStateTaskDependency(taskId, isChecked, project);
+        return;
+    }
+    if (event.target.classList.contains("task-delete")) {
+        console.log("funciona el event");
+        const taskId = Number(event.target.dataset.id);
+        const project = projects.find((project) => project.isSelected === true);
+        deleteTaskDependency(taskId, project);
     }
 });

@@ -9,8 +9,15 @@ const textArchitecture = document.querySelector(".project__architecture-descript
 const textStack = document.querySelector(".project__technology-description");
 const textNote = document.querySelector(".project__note-textarea");
 const projectDateInput = document.querySelector(".project__date");
+const inputRequirement = document.querySelector(".project__input-container");
+const requirementTaskContainer = document.querySelector(".project__requirements-tasks");
+// muestra el input para agregar tarea
+function inputRequirementVisible() {
+    inputRequirement.classList.toggle("invisible");
+    inputRequirement.classList.toggle("visible");
+}
 
-// muestra el modal para añadir nuevo proeycto
+// muestra el modal para añadir nuevo proeycto......| estos tiene que refactorizarse con toogle en una sola funcion
 function modalMenuVisible(addProjectBtn) {
     projectInput.value = "";
     addProjectBtn.classList.remove("visible");
@@ -51,6 +58,7 @@ function renderProject(projects) {
         textStack.value = "";
         textNote.value = "";
         projectDateInput.value = "";
+        requirementTaskContainer.innerHTML = "";
         return;
     }
     projects.forEach((project) => {
@@ -80,6 +88,12 @@ function renderProject(projects) {
             // date
             projectDateInput.value = project.deadLine;
             console.log(project.deadLine);
+            // requirement
+            requirementTaskContainer.innerHTML = "";
+            const requirementArray = project.requirements;
+            requirementArray.forEach((task) => {
+                createTask(task);
+            });
         }
     });
 }
@@ -117,5 +131,34 @@ function createProjectElement(projectName, project) {
     opcionContainer.appendChild(deleteIcon);
     projectMenu.appendChild(elementContainer);
 }
+// task
+function createTask(task) {
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-task");
+    const taskCheckbox = document.createElement("input");
+    taskCheckbox.dataset.id = task.id;
+    taskCheckbox.checked = task.status;
+    taskCheckbox.setAttribute("type", "checkbox");
 
-export { modalMenuVisible, modalMenuInvisible, renderMenu, renderProject, projectMenu, modalEditnameVisibility };
+    const taskName = document.createElement("p");
+    taskName.textContent = task.name;
+    const taskDeleteBtn = document.createElement("button");
+    const taskIcon = document.createElement("i");
+    taskIcon.classList.add("fa-solid", "fa-trash");
+
+    taskContainer.appendChild(taskCheckbox);
+    taskContainer.appendChild(taskName);
+    taskContainer.appendChild(taskDeleteBtn);
+    taskDeleteBtn.appendChild(taskIcon);
+    requirementTaskContainer.appendChild(taskContainer);
+}
+
+export {
+    modalMenuVisible,
+    modalMenuInvisible,
+    renderMenu,
+    renderProject,
+    projectMenu,
+    modalEditnameVisibility,
+    inputRequirementVisible,
+};

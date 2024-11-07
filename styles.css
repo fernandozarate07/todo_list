@@ -18,6 +18,27 @@ i,
 input {
     cursor: pointer;
 }
+.task-task {
+    padding: 10px;
+    display: flex;
+    color: var(--color-white);
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-black);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.task-task button {
+    border-radius: 10px;
+    border: none;
+}
+.task-task i {
+    padding: 10px;
+}
+.icon-project {
+    padding: 10px;
+    font-size: 1rem;
+}
 .btn-off {
     opacity: 0.2;
     border: none;
@@ -207,8 +228,6 @@ input {
     border-radius: 10px;
 }
 .project__project-editname-submit-btn {
-    padding: 10px;
-
     border-radius: 10px;
     border: none;
     color: var(--color-black);
@@ -219,13 +238,12 @@ input {
     border-radius: 10px;
     border: none;
     outline: none;
-    padding: 10px;
+    padding: 8px;
 }
 .project__edit-btn {
-    padding: 10px;
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
+    background-color: var(--color-white);
 }
 /* requirement */
 .project__requirements {
@@ -245,10 +263,31 @@ input {
     background-color: var(--color-white);
     border-radius: 10px;
 }
+.project__add-task-input-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.project__input-container {
+    width: 67%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+.project-save-btn {
+    border-radius: 10px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-black);
+}
+.input-task-requirement {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--color-black);
+    padding: 8px;
+    outline: none;
+}
 .project__requirements-add-btn {
     padding: 10px;
-
-    align-self: flex-end;
 
     border-radius: 10px;
     border: none;

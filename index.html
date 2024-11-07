@@ -58,18 +58,30 @@
                     <div class="projec__modal-name-container">
                         <form class="project__editname-form invisible">
                             <input type="text" class="project__input-modal-name" placeholder="New name" />
-                            <button class="project__project-editname-submit-btn">Save</button>
+                            <button class="project__project-editname-submit-btn">
+                                <i class="fa-solid fa-floppy-disk icon-project"></i>
+                            </button>
                         </form>
-                        <button class="project__edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="project__edit-btn">
+                            <i class="fa-solid fa-pen-to-square icon-project"></i>
+                        </button>
                     </div>
                 </div>
                 <!-- requirement -->
                 <div class="project__requirements item">
                     <h3 class="project__requirements-name">Requirements</h3>
                     <div class="project__requirements-task-container">
-                        <button class="project__requirements-add-btn">
-                            Add requirement <i class="fa-solid fa-plus menu__add-app-icon"></i>
-                        </button>
+                        <div class="project__add-task-input-container">
+                            <button class="project__requirements-add-btn">
+                                Add requirement <i class="fa-solid fa-plus menu__add-app-icon"></i>
+                            </button>
+                            <div class="project__input-container invisible">
+                                <input type="text" class="input-task-requirement" />
+                                <button class="project-save-btn">
+                                    <i class="fa-solid fa-floppy-disk icon-project"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="project__requirements-tasks"></div>
                     </div>
                 </div>

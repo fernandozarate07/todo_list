@@ -5,6 +5,7 @@ import {
     projectMenu,
     renderProject,
     modalEditnameVisibility,
+    inputRequirementVisible,
 } from "./vision.js";
 import {
     addObservers,
@@ -20,6 +21,7 @@ import {
     renderTextStack,
     renderTextNote,
     changeDate,
+    addTaskRequirement,
 } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
@@ -131,4 +133,19 @@ textNote.addEventListener("input", () => {
 const projectDateInput = document.querySelector(".project__date");
 projectDateInput.addEventListener("input", () => {
     changeDate(projectDateInput);
+});
+// requirement
+const addRequirementBtn = document.querySelector(".project__requirements-add-btn");
+const saveRequirementBtn = document.querySelector(".project-save-btn");
+const inputRequirement = document.querySelector(".input-task-requirement");
+
+addRequirementBtn.addEventListener("click", () => {
+    inputRequirementVisible();
+    inputRequirement.value = "";
+});
+
+saveRequirementBtn.addEventListener("click", () => {
+    const taskName = inputRequirement.value;
+    addTaskRequirement(taskName);
+    inputRequirementVisible();
 });

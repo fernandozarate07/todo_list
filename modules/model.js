@@ -24,6 +24,15 @@ const menuObserver = (() => {
         });
     }
     // esta clase funciona para crear instacia de objetos del tipo project
+    class Requirement {
+        constructor(taskName) {
+            const taskId = Number(localStorage.getItem("taskRequirementId")) || 1;
+            this.id = taskId;
+            localStorage.setItem("taskRequirementId", taskId + 1); // Incrementa y guarda el nuevo valor
+            this.name = taskName;
+            this.status = false;
+        }
+    }
     class Project {
         constructor(projectName) {
             const currentId = Number(localStorage.getItem("projectIdCounter")) || 1;
@@ -113,6 +122,14 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
+    function addTaskRequirement(taskName) {
+        let project = projects.find((project) => project.isSelected === true);
+        const newTask = new Requirement(taskName);
+        project.requirements.push(newTask);
+        console.log(newTask);
+        saveProjects();
+        notify();
+    }
     return {
         addObservers,
         Project,
@@ -126,6 +143,7 @@ const menuObserver = (() => {
         renderTextStack,
         renderTextNote,
         changeDate,
+        addTaskRequirement,
     };
 })();
 export const {
@@ -141,5 +159,6 @@ export const {
     renderTextStack,
     renderTextNote,
     changeDate,
+    addTaskRequirement,
 } = menuObserver;
 export { projects };

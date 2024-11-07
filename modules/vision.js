@@ -135,16 +135,22 @@ function createProjectElement(projectName, project) {
 function createTask(task) {
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-task");
+
     const taskCheckbox = document.createElement("input");
     taskCheckbox.dataset.id = task.id;
     taskCheckbox.checked = task.status;
     taskCheckbox.setAttribute("type", "checkbox");
+    taskCheckbox.classList.add("task-checkbox");
 
     const taskName = document.createElement("p");
     taskName.textContent = task.name;
+
     const taskDeleteBtn = document.createElement("button");
+
     const taskIcon = document.createElement("i");
     taskIcon.classList.add("fa-solid", "fa-trash");
+    taskIcon.classList.add("task-delete");
+    taskIcon.dataset.id = task.id;
 
     taskContainer.appendChild(taskCheckbox);
     taskContainer.appendChild(taskName);

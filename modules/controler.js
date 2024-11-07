@@ -22,6 +22,8 @@ import {
     renderTextNote,
     changeDate,
     addTaskRequirement,
+    changeStateTask,
+    deleteTask,
 } from "./model.js";
 // observadores
 addObservers(renderMenu); //agregar la funcion renderMenu como un observador
@@ -148,4 +150,21 @@ saveRequirementBtn.addEventListener("click", () => {
     const taskName = inputRequirement.value;
     addTaskRequirement(taskName);
     inputRequirementVisible();
+});
+const requirementTaskContainer = document.querySelector(".project__requirements-tasks");
+requirementTaskContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("task-checkbox")) {
+        const taskId = Number(event.target.dataset.id);
+        const project = projects.find((project) => project.isSelected === true);
+        const isChecked = event.target.checked;
+        event.stopPropagation();
+        changeStateTask(taskId, isChecked, project);
+        return;
+    }
+    if (event.target.classList.contains("task-delete")) {
+        console.log("funciona el event");
+        const taskId = Number(event.target.dataset.id);
+        const project = projects.find((project) => project.isSelected === true);
+        deleteTask(taskId, project);
+    }
 });

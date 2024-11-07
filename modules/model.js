@@ -130,6 +130,20 @@ const menuObserver = (() => {
         saveProjects();
         notify();
     }
+    function changeStateTask(taskId, isChecked, project) {
+        let taskToChange = project.requirements.find((task) => task.id === taskId);
+        taskToChange.status = isChecked;
+        saveProjects();
+        notify();
+        console.log(taskToChange.status);
+    }
+    function deleteTask(taskId, project) {
+        let taskToDelete = project.requirements.findIndex((task) => task.id === taskId);
+        console.log("Index to delete:", taskToDelete);
+        project.requirements.splice(taskToDelete, 1);
+        saveProjects();
+        notify();
+    }
     return {
         addObservers,
         Project,
@@ -144,6 +158,8 @@ const menuObserver = (() => {
         renderTextNote,
         changeDate,
         addTaskRequirement,
+        changeStateTask,
+        deleteTask,
     };
 })();
 export const {
@@ -160,5 +176,7 @@ export const {
     renderTextNote,
     changeDate,
     addTaskRequirement,
+    changeStateTask,
+    deleteTask,
 } = menuObserver;
 export { projects };

@@ -1,16 +1,17 @@
 import {
-    modalMenuInvisible,
-    modalMenuVisible,
-    renderMenu,
-    projectMenu,
-    renderProject,
-    modalEditnameVisibility,
-    inputRequirementVisible,
-    inputDependencyVisible,
+    // variables
+    containerProjectMenu,
+    // funciones
+    toggleMenuVisibility,
+    toggleRequirementVisibility,
+    toggleDependencyVisibility,
+    toggleEditNameVisibility,
+    renderProjectMenu,
+    renderProjectContent,
 } from "./vision.js";
 import {
+    // funciones
     addObservers,
-    Project,
     addProject,
     projects,
     deleteProject,
@@ -30,24 +31,32 @@ import {
     deleteTaskDependency,
 } from "./model.js";
 // observadores
-addObservers(renderMenu); //agregar la funcion renderMenu como un observador
-addObservers(renderProject);
+addObservers(renderProjectMenu); //agregar la funcion renderMenu como un observador
+addObservers(renderProjectContent);
 
 // cargar pagina de incio
-renderMenu(projects); //renderiza la pagina al entrar y carga los proyectos almazenados en localstorage
-renderProject(projects);
+renderProjectMenu(projects); //renderiza la pagina al entrar y carga los proyectos almazenados en localstorage
+renderProjectContent(projects);
 
 // funcionalidad add project
 const addProjectBtn = document.querySelector(".menu__add-app-btn");
 addProjectBtn.addEventListener("click", (event) => {
-    modalMenuVisible(addProjectBtn);
+    toggleMenuVisibility();
 });
 const cancelModaltBtn = document.querySelector(".menu__add-app-btn-cancel");
 cancelModaltBtn.addEventListener("click", (event) => {
-    modalMenuInvisible(addProjectBtn);
+    toggleMenuVisibility();
 });
 function getName() {
     return document.querySelector(".menu__add-app-input").value;
+}
+function getProject() {
+    const project = projects.find((project) => project.isSelected === true);
+    return project;
+}
+function getProjectID(event) {
+    const id = Number(event.target.dataset.id);
+    return id;
 }
 function validateName(projectName, projects) {
     if (projectName === "") {
@@ -62,60 +71,58 @@ function validateName(projectName, projects) {
 }
 const formName = document.getElementById("form-name").addEventListener("submit", (event) => {
     event.preventDefault();
-    let projectName = getName();
-    const isvalid = validateName(projectName, projects); // para obtener un boleano y utilizarlo en el condicional siguiente
+    const name = getName();
+    const isvalid = validateName(name, projects);
     if (isvalid) {
-        modalMenuInvisible(addProjectBtn);
-        let newProject = new Project(projectName);
-        addProject(newProject);
+        toggleMenuVisibility();
+        addProject(name);
     } else {
         alert("error");
     }
 });
 // funcionalid de project menu
-projectMenu.addEventListener("click", (event) => {
+containerProjectMenu.addEventListener("click", (event) => {
     // delete funcionalidad
     if (event.target.classList.contains("project-preview__trash")) {
-        const id = Number(event.target.dataset.id);
+        const id = getProjectID(event);
         deleteProject(id);
     }
     // cambiar el estado del proyecto
 
     if (event.target.classList.contains("project-preview__task-done")) {
-        const id = Number(event.target.dataset.id);
+        const id = getProjectID(event);
         const isChecked = event.target.checked;
-        event.stopPropagation(); // Detiene la propagación para que no se llame a selectedProject
+        event.stopPropagation();
         changeStateinMenu(id, isChecked);
         return;
     }
     // selecionar proyecto
     if (event.target.classList.contains("project-preview")) {
-        const id = Number(event.target.dataset.id);
+        const id = getProjectID(event);
         selectedProject(id);
     }
 });
-// funcionalidad de project
-
 // status
 const statusContainer = document.querySelector(".project__status-btn-container").addEventListener("click", (event) => {
-    const projectToChangeStatus = projects.find((project) => project.isSelected === true);
+    const projectToChangeStatus = getProject();
     changeStateinProject(event, projectToChangeStatus);
 });
 // name
 const editNameBtm = document.querySelector(".project__edit-btn");
-editNameBtm.addEventListener("click", () => {
-    modalEditnameVisibility();
-});
 const saveBtn = document.querySelector(".project__project-editname-submit-btn");
 const inputEditName = document.querySelector(".project__input-modal-name");
+
+editNameBtm.addEventListener("click", () => {
+    toggleEditNameVisibility();
+});
 saveBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    let projectToEditName = projects.find((project) => project.isSelected === true);
+    let projectToEditName = getProject();
     let newName = inputEditName.value;
     const isvalid = validateName(newName, projects);
     if (isvalid) {
         editName(projectToEditName, newName);
-        modalEditnameVisibility();
+        toggleEditNameVisibility();
     } else {
         alert("error");
     }
@@ -146,20 +153,20 @@ const saveRequirementBtn = document.querySelector(".project-save-btn");
 const inputRequirement = document.querySelector(".input-task-requirement");
 
 addRequirementBtn.addEventListener("click", () => {
-    inputRequirementVisible();
+    toggleRequirementVisibility();
     inputRequirement.value = "";
 });
 
 saveRequirementBtn.addEventListener("click", () => {
     const taskName = inputRequirement.value;
     addTaskRequirement(taskName);
-    inputRequirementVisible();
+    toggleRequirementVisibility();
 });
 const requirementTaskContainer = document.querySelector(".project__requirements-tasks");
 requirementTaskContainer.addEventListener("click", (event) => {
     if (event.target.classList.contains("task-checkbox")) {
-        const taskId = Number(event.target.dataset.id);
-        const project = projects.find((project) => project.isSelected === true);
+        const taskId = getProjectID(event);
+        const project = getProject();
         const isChecked = event.target.checked;
         event.stopPropagation();
         changeStateTask(taskId, isChecked, project);
@@ -167,8 +174,8 @@ requirementTaskContainer.addEventListener("click", (event) => {
     }
     if (event.target.classList.contains("task-delete")) {
         console.log("funciona el event");
-        const taskId = Number(event.target.dataset.id);
-        const project = projects.find((project) => project.isSelected === true);
+        const taskId = getProjectID(event);
+        const project = getProject();
         deleteTask(taskId, project);
     }
 });
@@ -178,29 +185,28 @@ const saveDependencyBtn = document.querySelector(".project__dependency-save-btn"
 const inputDependency = document.querySelector(".input-task-dependency");
 
 addDependencyBtn.addEventListener("click", () => {
-    inputDependencyVisible();
+    toggleDependencyVisibility();
     inputDependency.value = "";
 });
 
 saveDependencyBtn.addEventListener("click", () => {
     const taskName = inputDependency.value;
     addTaskDependency(taskName);
-    inputDependencyVisible();
+    toggleDependencyVisibility();
 });
 const dependencyTaskContainer = document.querySelector(".project__dependency-tasks");
 dependencyTaskContainer.addEventListener("click", (event) => {
     if (event.target.classList.contains("task-checkbox")) {
-        const taskId = Number(event.target.dataset.id);
-        const project = projects.find((project) => project.isSelected === true);
+        const taskId = getProjectID(event);
+        const project = getProject();
         const isChecked = event.target.checked;
         event.stopPropagation();
         changeStateTaskDependency(taskId, isChecked, project);
         return;
     }
     if (event.target.classList.contains("task-delete")) {
-        console.log("funciona el event");
-        const taskId = Number(event.target.dataset.id);
-        const project = projects.find((project) => project.isSelected === true);
+        const taskId = getProjectID(event);
+        const project = getProject();
         deleteTaskDependency(taskId, project);
     }
 });

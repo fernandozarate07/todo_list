@@ -1,16 +1,13 @@
-// aca se guarda la logica de persistencia y local storage
 function loadProjects() {
     const storageProjects = localStorage.getItem("projects");
     return storageProjects ? JSON.parse(storageProjects) : [];
 }
-const projects = loadProjects(); // creamos el array de projects
-
+const projects = loadProjects();
 function saveProjects() {
     localStorage.setItem("projects", JSON.stringify(projects));
 }
-saveProjects(); // guardamos el array creado en localstorage
+saveProjects();
 
-// Existen en este modulo dos iffe que contienen la logica de dos patrones observadores
 const menuObserver = (() => {
     // aca encontraras la logica de observer
     const observers = [];
@@ -59,7 +56,8 @@ const menuObserver = (() => {
         }
     }
     //aca se ecnuentra la logica que sirve para cambiar el estado del sujeto
-    function addProject(newProject) {
+    function addProject(name) {
+        const newProject = new Project(name);
         projects.push(newProject);
         saveProjects();
         notify();
@@ -175,7 +173,6 @@ const menuObserver = (() => {
     }
     return {
         addObservers,
-        Project,
         addProject,
         deleteProject,
         changeStateinMenu,
@@ -196,7 +193,6 @@ const menuObserver = (() => {
 })();
 export const {
     addObservers,
-    Project,
     addProject,
     deleteProject,
     changeStateinMenu,
